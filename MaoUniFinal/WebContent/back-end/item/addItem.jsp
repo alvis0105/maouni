@@ -98,18 +98,17 @@
              <div class="menu-bar menu-bar-bottom"></div>
          </span>
          <div class="menu-wrap">
-             <div class="menu-sidebar" style="margin-top:20px;">
+             <div class="menu-sidebar" style="margin-top:30px;">
                  <ul class="menu">
-                     <li><a href="#">會員資料管理</a></li>
-                     <li><a href="#">商品訂單管理</a></li>
-                     <li><a href="ItemHomePage.jsp">商城管理</a></li>
-                     <li><a href="#">商城客服管理</a></li>
-                     <li><a href="#">討論區管理</a></li>
-                     <li><a href="#">浪浪找家管理</a></li>
-                     <li><a href="#">知識站管理</a></li>
-                     <li><a href="#">公告管理</a></li>
-                     <li><a href="#">美容師管理</a></li>
-                     <li><a href="#">美容預約檢舉管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/item/itemHomePage.jsp">商城管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/front-end/message/addMessage.jsp">商城客服管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/forumpost/forumPostHomePage.jsp">討論區管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp">浪浪找家管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/article/select_page_art.jsp">知識站管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/announcemet/select_page.jsp">公告管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/groomer/groomerList.jsp">美容師管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/groomer/grooming_report.jsp">美容預約檢舉管理</a></li>
                  </ul>
              </div>
          </div>
@@ -125,7 +124,7 @@
             	 <!-- 以下範圍為最上方包著商城管理以及右方後台人員的區塊, -->
                 <nav class="navbar navbar-light navbar-expand bg-white mb-4 topbar static-top">
                     <div class="container-fluid" style="margin-top:23px;margin-left:-6px;">
-<!--請看這行最右邊-->  <a class="btsp" href="ItemHomePage.jsp">商城管理</a>  <!-- 這行是商城管理的標題，可以自行設定，還有href可以自行設定跳轉的頁面 -->
+<!--請看這行最右邊-->  <a class="btsp" href="<%= request.getContextPath() %>/back-end/item/itemHomePage.jsp">商城管理</a>  <!-- 這行是商城管理的標題，可以自行設定，還有href可以自行設定跳轉的頁面 -->
                        	 <ul class="nav navbar-nav flex-nowrap ml-auto" style="margin-top:-10px;">                         
                            
                             <li class="nav-item dropdown no-arrow" style="margin-top:10px">
@@ -165,11 +164,6 @@
 					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/Item/ItemServlet" name="form1">
 						<table>
 							<tr>
-								<td>寵物類別：</td>
-								<td><input type="TEXT" name="itemPetType" size="45" placeholder="請輸入寵物類別"
-									 value="<%= (itemVO==null)? "" : itemVO.getItemPetType()%>" /></td>
-							</tr>
-							<tr>
 								<td>商品名稱：</td>
 								<td><input type="TEXT" name="itemName" size="45" placeholder="請輸入商品名稱"
 									 value="<%= (itemVO==null)? "" : itemVO.getItemName()%>" /></td>
@@ -188,7 +182,16 @@
 								<td>商品數量：</td> 
 								<td><input type="TEXT" name="itemAmount" size="45" placeholder="請輸入商品數量"
 									 value="<%= (itemVO==null)? "" : itemVO.getItemAmount()%>" /></td>
-							
+							</tr>
+							<tr>
+								<td>寵物類別：</td>
+								<td>
+								<select size="1" name="itemPetType">
+									<option value="<%= (itemVO==null)? "貓" : itemVO.getItemPetType()%>">貓
+									<option value="<%= (itemVO==null)? "狗" : itemVO.getItemPetType()%>">狗					
+								</select>
+								</td>
+							</tr>		
 							<jsp:useBean id="itemTypeSvc" scope="page" class="com.itemtype.model.ItemTypeService" />
 							<tr>
 								<td>商品類別：</td>
@@ -201,7 +204,8 @@
 									<input type="hidden" name="action" value="insert">
 									<input class=update type="submit" value="送出新增">
 								</td>
-							</tr>					
+							</tr>	
+		
 						</table>
 					</FORM>
 					</div> <!-- class="table-responsive" 結尾標籤 -->

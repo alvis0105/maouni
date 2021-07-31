@@ -68,7 +68,7 @@ public class ItemPhotosService {
 		ItemPhotosService ivc = new ItemPhotosService();
 		try {
 			//新增圖片
-			ivc.addItemPhotos(8, "InsertPic/8.jpg", java.sql.Date.valueOf("2021-07-07"));
+			ivc.addItemPhotos(10, "InsertPic/9.jpg", java.sql.Date.valueOf("2021-07-07"));
 			//更新圖片
 //			ivc.updateItemPhotos(8, 2, "test/1.jpg", java.sql.Date.valueOf("2021-07-07"));
 		} catch (IOException e) {
