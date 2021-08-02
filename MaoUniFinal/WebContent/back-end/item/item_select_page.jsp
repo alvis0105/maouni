@@ -7,12 +7,17 @@
 <jsp:useBean id="itemTypeSvc" scope="page" class="com.itemtype.model.ItemTypeService" />
 <jsp:useBean id="itemSvc" scope="page" class="com.item.model.ItemService" />
 
+<%
+  ItemVO itemVO = (ItemVO) request.getAttribute("itemVO");
+%>
+
+
 <html style="height: auto;">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>商城管理首頁</title>
+    <title>查詢首頁</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/hidden_menu.css"> 
   	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/hidden_menu2.css"> 
@@ -162,41 +167,88 @@
 			            </div>
 			            <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
 		           							
-								<ul>  
-								  <li>   
+<!-- 								<ul>   -->
+<!-- 								  <li>    -->
 								    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/Item/ItemServlet">
 								        
-								     <table>   
-								        <tr>
-									        <td>商品編號：</td>
-									        <td><input type="text" name="ITEM_ID" value="1"  placeholder="請輸入商品編號" style="width:50px;margin-left:-20px;"></td>
-								        </tr>
-								        <tr>   
-									       	<td>商品名稱：</td>
-									       	<td><input type="text" name="ITEM_NAME" value="貓咪坐墊"  placeholder="請輸入商品名稱"  style="width:60px;margin-left:-20px;"></td>
-								       	</tr>
-								       	<tr>
-									       	<td>寵物類別：</td>
-									       	<td><input type="text" name="ITEM_PET_TYPE" value="貓"  placeholder="請輸入寵物類別"></td>
-								       	</tr>
-								       	<tr>
-									       	<td>商品類別：</td>
-									       	<td>
-										        <select size="1" name="ITEMT_ID" >
-										          <option value="" selected>請選擇商品類別</option>
-										         <c:forEach var="itemTypeVO" items="${itemTypeSvc.all}" > 
-										          <option value="${itemTypeVO.itemtId}">${itemTypeVO.itemtName}</option>
-										         </c:forEach>   
-										        </select>
-									        </td>
-								       	</tr>
-								       </table> 
-							       			<input class="sontrue" type="submit" value="送出" style="margin-left:275px;margin-top:20px;">
-									        <input type="hidden" name="action" value="listItem_ByCompositeQuery">
-								     </FORM>
-								  			<a href="addItem.jsp">新增商品</a>
-								  </li>
-								</ul>
+<!-- 								     <table>    -->
+<!-- 								        <tr> -->
+<!-- 									        <td>商品編號：</td> -->
+<!-- 									        <td><input type="text" name="ITEM_ID" value="1"  placeholder="請輸入商品編號"></td> -->
+<!-- 								        </tr> -->
+<!-- 								        <tr>    -->
+<!-- 									       	<td>商品名稱：</td> -->
+<!-- 									       	<td><input type="text" name="ITEM_NAME" value="貓咪坐墊"  placeholder="請輸入商品名稱"></td> -->
+<!-- 								       	</tr> -->
+<!-- 								       	<tr> -->
+<!-- 									       	<td>寵物類別：</td> -->
+<!-- 									       	<td><input type="text" name="ITEM_PET_TYPE" value="貓"  placeholder="請輸入寵物類別"></td> -->
+<!-- 								       	</tr> -->
+<!-- 								       	<tr> -->
+<!-- 									       	<td>商品類別：</td> -->
+<!-- 									       	<td> -->
+<!-- 										        <select size="1" name="ITEMT_ID" > -->
+<!-- 										          <option value="" selected>請選擇商品類別</option> -->
+<%-- 										         <c:forEach var="itemTypeVO" items="${itemTypeSvc.all}" >  --%>
+<%-- 										          <option value="${itemTypeVO.itemtId}">${itemTypeVO.itemtName}</option> --%>
+<%-- 										         </c:forEach>    --%>
+<!-- 										        </select> -->
+<!-- 									        </td> -->
+<!-- 								       	</tr> -->
+<!-- 								       </table>  -->
+<!-- 							       			<input class="sontrue" type="submit" value="送出" style="margin-left:275px;margin-top:20px;"> -->
+<!-- 									        <input type="hidden" name="action" value="listItem_ByCompositeQuery"> -->
+								     
+<!-- 								  			<a href="addItem.jsp">新增商品</a> -->
+<!-- 								  </li> -->
+<!-- 								</ul> -->
+	
+							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">商品查詢</button>
+							
+							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="exampleModalLabel">查詢</h5>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body">
+							        <form>
+							          <div class="mb-3">
+							            <label for="message-text" class="col-form-label">以商品編號查詢</label>
+							            <input type="text" class="form-control" id="message-text" name="ITEM_ID" placeholder="請輸入商品編號">
+							          </div>
+							          <div class="mb-3">
+							            <label for="message-text" class="col-form-label">以商品名稱查詢</label>
+							            <input type="text" class="form-control" id="message-text" name="ITEM_NAME" placeholder="請輸入商品名稱">
+							          </div>
+							          <div class="mb-3">
+							            <label for="droptext" class="col-form-label">以寵物類別查詢</label>
+										<select size="1" name="ITEM_PET_TYPE" class="form-control" id="droptext">
+											<option value="" selected>請選擇寵物類別</option>
+											<option value="<%= (itemVO==null)? "貓" : itemVO.getItemPetType()%>">貓
+											<option value="<%= (itemVO==null)? "狗" : itemVO.getItemPetType()%>">狗					
+										</select>
+							          </div>
+							          <div class="mb-3">
+							            <label for="droptext" class="col-form-label">以商品類別查詢</label>
+							            <select size="1" name="ITEMT_ID" class="form-control" id="droptext"> 
+									          <option value="" selected>請選擇商品類別</option> 
+									         <c:forEach var="itemTypeVO" items="${itemTypeSvc.all}" >  
+									          <option value="${itemTypeVO.itemtId}">${itemTypeVO.itemtName}</option> 
+								         	 </c:forEach>    
+										</select> 
+										</div>
+							        </form>
+							      </div>
+							      <div class="modal-footer">
+							        <input class="sontrue" type="submit" value="送出" style="margin-left:275px;margin-top:20px;">
+							        <input type="hidden" name="action" value="listItem_ByCompositeQuery">
+							      </div>
+							    </div>
+							  </div>
+							</div>	
+						</FORM>
 						</div> <!-- class="table-responsive" 結尾標籤 -->
 				</div> <!-- class="card-body" 結尾標籤 -->			
 			</div> <!-- class="card" 結尾標籤 -->	
@@ -204,6 +256,11 @@
      </div> <!-- Class="Wrapper"的結尾標籤 -->
 
 
+
+	<!-- 以下為modal用--> 
+	<script src="<%=request.getContextPath()%>/resources/js/itemquery.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.bundle.min.js"></script>
+	<!-- 以上為modal用--> 
 
     <script src="<%=request.getContextPath()%>/resources/js/jquery.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>

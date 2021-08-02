@@ -345,7 +345,7 @@ public class ItemServlet extends HttpServlet {
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("itemVO", itemVO); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/back-end/item/listAllItem.jsp";
+				String url = "/back-end/item/listOneItem.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneItem.jsp
 				successView.forward(req, res);
 				
@@ -486,7 +486,7 @@ public class ItemServlet extends HttpServlet {
 				itemVO = itemSvc.addItem(itemTypeId, itemPetType, itemName, itemContent, itemPrice, itemAmount);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/back-end/item/listOneItem.jsp";
+				String url = "/back-end/item/listAllItem.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);				
 				
